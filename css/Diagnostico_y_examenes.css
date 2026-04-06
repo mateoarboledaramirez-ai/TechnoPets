@@ -1,0 +1,620 @@
+:root {
+      --teal: #0a9396;
+      --teal-dark: #005f73;
+      --teal-light: #94d2bd;
+      --orange: #ffa805;
+      --bg: #001219;
+      --card-bg: #0d2b35;
+      --card-inner: #0a2230;
+      --text: #e0f0f0;
+      --text-muted: #7fbfcc;
+      --border: rgba(148,210,189,0.12);
+      --border-active: rgba(10,147,150,0.5);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(10,147,150,0.11) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,168,5,0.06) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* === NAVBAR === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0,18,25,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148,210,189,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: var(--teal-light);
+      text-decoration: none;
+    }
+    .logo span { font-style: italic; color: var(--orange); }
+
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-btn {
+      background: var(--teal) !important;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+    }
+    .nav-btn:hover { background: var(--teal-dark) !important; }
+
+    .nav-back {
+      background: rgba(148,210,189,0.08) !important;
+      color: var(--teal-light) !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(148,210,189,0.18) !important;
+    }
+    .nav-back:hover { background: rgba(148,210,189,0.16) !important; }
+
+    /* === PAGE HEADER === */
+    .page-header {
+      text-align: center;
+      padding: 56px 24px 36px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(148,210,189,0.1);
+      border: 1px solid rgba(148,210,189,0.25);
+      color: var(--teal-light);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .page-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .page-header h1 em { font-style: italic; color: var(--orange); }
+
+    .page-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* === PET SELECTOR === */
+    .pet-selector-wrap {
+      max-width: 860px;
+      margin: 0 auto 32px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.7s 0.08s ease both;
+    }
+
+    .pet-selector-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .pet-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pet-tab {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: all 0.25s;
+    }
+
+    .pet-tab:hover { border-color: rgba(10,147,150,0.4); color: var(--teal-light); }
+
+    .pet-tab.active {
+      background: rgba(10,147,150,0.15);
+      border-color: var(--teal);
+      color: var(--teal-light);
+      box-shadow: 0 0 0 3px rgba(10,147,150,0.12);
+    }
+
+    .pet-tab .pet-emoji { font-size: 1.1rem; }
+
+    /* === MAIN CONTENT === */
+    .content-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === PET FICHA === */
+    .pet-ficha {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease both;
+      display: none;
+    }
+
+    .pet-ficha.active { display: block; }
+
+    .ficha-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .ficha-avatar {
+      width: 60px; height: 60px;
+      border-radius: 16px;
+      background: rgba(10,147,150,0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .ficha-name h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      color: white;
+    }
+
+    .ficha-name p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .ficha-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .ficha-item {
+      background: var(--card-inner);
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(148,210,189,0.08);
+    }
+
+    .ficha-item .fi-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .ficha-item .fi-value {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* === SECTION LABEL === */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .section-label span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(148,210,189,0.15);
+    }
+
+    /* === CONSULTA CARD === */
+    .consulta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .consulta-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .consulta-card:nth-child(1) { animation-delay: 0.05s; }
+    .consulta-card:nth-child(2) { animation-delay: 0.10s; }
+    .consulta-card:nth-child(3) { animation-delay: 0.15s; }
+
+    .consulta-card.open {
+      border-color: var(--border-active);
+      box-shadow: 0 8px 30px rgba(10,147,150,0.15);
+    }
+
+    /* Card summary row (siempre visible) */
+    .consulta-summary {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .consulta-summary:hover { background: rgba(10,147,150,0.04); }
+
+    .consulta-date-badge {
+      background: rgba(10,147,150,0.14);
+      border: 1px solid rgba(10,147,150,0.25);
+      border-radius: 10px;
+      padding: 8px 12px;
+      text-align: center;
+      flex-shrink: 0;
+      min-width: 58px;
+    }
+
+    .consulta-date-badge .day {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--teal-light);
+      line-height: 1;
+    }
+
+    .consulta-date-badge .month {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .consulta-main { flex: 1; min-width: 0; }
+
+    .consulta-main h3 {
+      font-size: 0.97rem;
+      font-weight: 800;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .consulta-main p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    .consulta-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-vet {
+      background: rgba(10,147,150,0.14);
+      color: var(--teal-light);
+      border: 1px solid rgba(10,147,150,0.25);
+    }
+
+    .tag-exams {
+      background: rgba(255,168,5,0.12);
+      color: #ffc94d;
+      border: 1px solid rgba(255,168,5,0.2);
+    }
+
+    .tag-ok {
+      background: rgba(82,183,136,0.12);
+      color: #52b788;
+      border: 1px solid rgba(82,183,136,0.2);
+    }
+
+    .tag-pending {
+      background: rgba(255,100,80,0.1);
+      color: #ff8870;
+      border: 1px solid rgba(255,100,80,0.2);
+    }
+
+    .consulta-toggle {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(148,210,189,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .consulta-card.open .consulta-toggle {
+      background: var(--teal);
+      color: white;
+      transform: rotate(180deg);
+    }
+
+    /* Collapsible detail */
+    .consulta-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .consulta-card.open .consulta-detail { max-height: 1000px; }
+
+    .consulta-detail-inner {
+      padding: 0 22px 22px;
+      border-top: 1px solid rgba(148,210,189,0.08);
+      padding-top: 20px;
+    }
+
+    /* Detail sections */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 540px) { .detail-grid { grid-template-columns: 1fr; } }
+
+    .detail-section h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .detail-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .detail-item {
+      background: var(--card-inner);
+      border-radius: 10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(148,210,189,0.07);
+    }
+
+    .detail-item .di-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .detail-item .di-value {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Exámenes table */
+    .exams-section h4 {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .exam-item {
+      background: var(--card-inner);
+      border: 1px solid rgba(148,210,189,0.07);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+
+    .exam-item:hover { border-color: rgba(10,147,150,0.3); }
+
+    .exam-icon {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(10,147,150,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .exam-info { flex: 1; min-width: 0; }
+
+    .exam-info .ex-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .exam-info .ex-meta {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .exam-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+    .btn-result {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 3px 10px rgba(10,147,150,0.28);
+    }
+
+    .btn-result:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(10,147,150,0.4); }
+
+    .btn-result-disabled {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(148,210,189,0.07);
+      color: var(--text-muted);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 50px;
+      border: 1px solid var(--border);
+      cursor: default;
+    }
+
+    /* === EMPTY STATE === */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-muted);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.4;
+    }
+
+    .empty-state p { font-size: 0.9rem; font-weight: 300; }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      color: rgba(127,191,204,0.35);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(148,210,189,0.07);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .consulta-tags { display: none; }
+    }
