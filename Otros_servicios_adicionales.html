@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Otros Servicios Adicionales</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0a9396;
+      --teal-dark: #005f73;
+      --teal-light: #94d2bd;
+      --orange: #ffa805;
+      --bg: #001219;
+      --card-bg: #0d2b35;
+      --card-inner: #0a2230;
+      --text: #e0f0f0;
+      --text-muted: #7fbfcc;
+      --border: rgba(148,210,189,0.12);
+      --border-hover: rgba(10,147,150,0.5);
+      --input-bg: #0a2030;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(10,147,150,0.11) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,168,5,0.06) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* === NAVBAR === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0,18,25,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148,210,189,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: var(--teal-light);
+      text-decoration: none;
+    }
+    .logo span { font-style: italic; color: var(--orange); }
+
+    .nav-links { display: flex; gap: 20px; list-style: none; align-items: center; }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-btn {
+      background: var(--teal) !important;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s !important;
+    }
+    .nav-btn:hover { background: var(--teal-dark) !important; }
+
+    .nav-back {
+      background: rgba(148,210,189,0.08) !important;
+      color: var(--teal-light) !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(148,210,189,0.18) !important;
+    }
+    .nav-back:hover { background: rgba(148,210,189,0.16) !important; }
+
+    /* === PAGE HEADER === */
+    .page-header {
+      text-align: center;
+      padding: 60px 24px 40px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(148,210,189,0.1);
+      border: 1px solid rgba(148,210,189,0.25);
+      color: var(--teal-light);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .page-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .page-header h1 em { font-style: italic; color: var(--orange); }
+
+    .page-header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* === SECTION LABEL === */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      max-width: 900px;
+      margin: 0 auto 24px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(148,210,189,0.15);
+    }
+
+    /* === MAIN GRID (servicios generales) === */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 0 auto 56px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .svc-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.3s cubic-bezier(0.34,1.4,0.64,1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,147,150,0.07), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .svc-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 36px rgba(10,147,150,0.16);
+    }
+    .svc-card:hover::after { opacity: 1; }
+
+    .svc-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(10,147,150,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .svc-card:hover .svc-icon { background: rgba(10,147,150,0.28); }
+
+    .svc-info h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      margin-bottom: 3px;
+    }
+
+    .svc-info p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* === GROOMING SECTION === */
+    .grooming-wrap {
+      max-width: 900px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .grooming-hero {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 36px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grooming-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,147,150,0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .grooming-hero-icon {
+      width: 80px; height: 80px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(10,147,150,0.35);
+    }
+
+    .grooming-hero-text h2 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 6px;
+    }
+
+    .grooming-hero-text p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* Grooming sub-cards grid */
+    .grooming-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .grm-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s cubic-bezier(0.34,1.4,0.64,1);
+    }
+
+    .grm-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 10px 32px rgba(10,147,150,0.16);
+      transform: translateY(-3px);
+    }
+
+    .grm-card.open { border-color: var(--teal); box-shadow: 0 8px 28px rgba(10,147,150,0.2); }
+
+    .grm-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 20px;
+    }
+
+    .grm-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: rgba(10,147,150,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      transition: background 0.3s;
+    }
+
+    .grm-card:hover .grm-icon,
+    .grm-card.open .grm-icon { background: rgba(10,147,150,0.28); }
+
+    .grm-title { flex: 1; }
+
+    .grm-title h3 {
+      font-size: 0.93rem;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .grm-title .price {
+      font-size: 0.78rem;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    .grm-toggle {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: rgba(148,210,189,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .grm-card.open .grm-toggle { background: var(--teal); color: white; transform: rotate(180deg); }
+
+    .grm-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .grm-card.open .grm-body { max-height: 400px; }
+
+    .grm-body-inner {
+      padding: 0 20px 18px;
+      border-top: 1px solid rgba(148,210,189,0.08);
+      padding-top: 14px;
+    }
+
+    .grm-body-inner ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .grm-body-inner ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .grm-body-inner ul li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .btn-agendar {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 12px rgba(10,147,150,0.28);
+    }
+
+    .btn-agendar:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(10,147,150,0.4); }
+
+    /* === MODAL AGENDAMIENTO === */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 100%;
+      animation: fadeUp 0.35s ease both;
+      position: relative;
+    }
+
+    .modal-box h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .modal-box .modal-sub {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .m-field { margin-bottom: 16px; }
+
+    .m-field label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .m-field input,
+    .m-field select {
+      width: 100%;
+      background: var(--input-bg);
+      border: 1px solid rgba(148,210,189,0.15);
+      border-radius: 11px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      appearance: none;
+    }
+
+    .m-field input::placeholder { color: rgba(127,191,204,0.3); }
+
+    .m-field input:focus,
+    .m-field select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(10,147,150,0.18);
+    }
+
+    .m-field select option { background: #0d2b35; }
+
+    .m-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .modal-btns {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      border: 1px solid rgba(148,210,189,0.2);
+      border-radius: 11px;
+      padding: 13px;
+      color: var(--text-muted);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-cancel:hover { border-color: rgba(148,210,189,0.4); color: var(--teal-light); }
+
+    .btn-confirm {
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      border: none;
+      border-radius: 11px;
+      padding: 13px;
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 5px 16px rgba(10,147,150,0.3);
+      letter-spacing: 0.5px;
+    }
+
+    .btn-confirm:hover { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(10,147,150,0.42); }
+
+    /* Confirm success state */
+    .modal-success {
+      text-align: center;
+      padding: 20px 0 8px;
+      display: none;
+    }
+
+    .modal-success .success-icon { font-size: 3rem; margin-bottom: 12px; }
+
+    .modal-success h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      color: #52b788;
+      margin-bottom: 6px;
+    }
+
+    .modal-success p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      color: rgba(127,191,204,0.35);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(148,210,189,0.07);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .grooming-hero { flex-direction: column; text-align: center; }
+      .m-field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="Pagina_Principal.html">🐾 TechnoPets</a>
+    <ul class="nav-links">
+      <li><a href="Pagina_Principal.html" class="nav-back">← Inicio</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-badge">✨ Servicios extra</div>
+    <h1>Otros Servicios<br><em>Adicionales</em></h1>
+    <p>Cuidado completo para tu mascota más allá de la consulta: baño, peluquería, cortes y mucho más.</p>
+  </header>
+
+  <!-- ── SERVICIOS GENERALES ── -->
+  <div class="section-label" style="animation: fadeUp 0.6s 0.05s ease both;">
+    <span>Servicios disponibles</span>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="svc-card">
+      <div class="svc-icon">🩺</div>
+      <div class="svc-info">
+        <h3>Consulta médica</h3>
+        <p>Revisión general y chequeo de salud preventivo</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">💉</div>
+      <div class="svc-info">
+        <h3>Vacunación</h3>
+        <p>Esquema completo de vacunas y refuerzos anuales</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">💊</div>
+      <div class="svc-info">
+        <h3>Desparasitación</h3>
+        <p>Tratamiento interno y externo contra parásitos</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">✂️</div>
+      <div class="svc-info">
+        <h3>Corte de uñas</h3>
+        <p>Limado y recorte seguro con lima especializada</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">🦷</div>
+      <div class="svc-info">
+        <h3>Limpieza dental express</h3>
+        <p>Remoción de sarro superficial sin anestesia</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">🐛</div>
+      <div class="svc-info">
+        <h3>Control de pulgas y garrapatas</h3>
+        <p>Aplicación de pipetas y collares antiparasitarios</p>
+      </div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-icon">✂️</div>
+      <div class="svc-info">
+        <h3>Peluquería</h3>
+        <p>Baño, corte y estilizado para mascotas, con productos hipoalergénicos</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- === MODAL AGENDAMIENTO === -->
+  <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalFondo(event)">
+    <div class="modal-box">
+
+      <!-- Formulario -->
+      <div id="modal-form">
+        <h3 id="modal-titulo">Agendar cita</h3>
+        <p class="modal-sub" id="modal-subtitulo">Completa los datos para reservar tu turno.</p>
+
+        <div class="m-field">
+          <label>Nombre de tu mascota</label>
+          <input type="text" id="m-pet" placeholder="Ej: Max">
+        </div>
+
+        <div class="m-field-row">
+          <div class="m-field">
+            <label>Especie</label>
+            <select id="m-especie">
+              <option value="">Seleccionar</option>
+              <option value="Perro">Perro</option>
+              <option value="Gato">Gato</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="m-field">
+            <label>Tamaño</label>
+            <select id="m-tamano">
+              <option value="">Seleccionar</option>
+              <option value="Pequeño">Pequeño (&lt;10 kg)</option>
+              <option value="Mediano">Mediano (10–25 kg)</option>
+              <option value="Grande">Grande (&gt;25 kg)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="m-field">
+          <label>Tu nombre</label>
+          <input type="text" id="m-dueno" placeholder="Nombre del dueño">
+        </div>
+
+        <div class="m-field">
+          <label>Teléfono de contacto</label>
+          <input type="tel" id="m-tel" placeholder="+57 300...">
+        </div>
+
+        <div class="m-field-row">
+          <div class="m-field">
+            <label>Fecha</label>
+            <input type="date" id="m-fecha">
+          </div>
+          <div class="m-field">
+            <label>Hora preferida</label>
+            <select id="m-hora">
+              <option value="">Seleccionar</option>
+              <option>08:00 AM</option>
+              <option>09:00 AM</option>
+              <option>10:00 AM</option>
+              <option>11:00 AM</option>
+              <option>02:00 PM</option>
+              <option>03:00 PM</option>
+              <option>04:00 PM</option>
+            </select>
+          </div>
+        </div>
+
+        <p id="modal-error" style="font-size:0.8rem; color:#ffb703; margin-bottom:10px; display:none;"></p>
+
+        <div class="modal-btns">
+          <button class="btn-cancel" onclick="cerrarModal()">← Cancelar</button>
+          <button class="btn-confirm" onclick="confirmarCita()">✓ Confirmar cita</button>
+        </div>
+      </div>
+
+      <!-- Éxito -->
+      <div class="modal-success" id="modal-success">
+        <div class="success-icon">🐾</div>
+        <h3>¡Cita agendada!</h3>
+        <p id="success-msg">Tu cita ha sido registrada. Te contactaremos para confirmar el turno.</p>
+        <button class="btn-confirm" style="margin-top:20px; width:100%;" onclick="cerrarModal()">Listo ✓</button>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>🐾 TechnoPets · Hecho en 2025 por: Liliana Prato, David Carvajal, Mateo Arboleda y Jesus Garcia 🐾</p>
+  </footer>
+
+  <script>
+    // Pre-llenar datos del usuario logueado si existen
+    window.addEventListener('DOMContentLoaded', () => {
+      const nombre = localStorage.getItem('tecnoUserFullName') || localStorage.getItem('tecnoUserName') || '';
+      const tel    = localStorage.getItem('tecnoUserPhone') || '';
+      if (nombre) document.getElementById('m-dueno').value = nombre;
+      if (tel)    document.getElementById('m-tel').value   = tel;
+
+      // Fecha mínima = hoy
+      const hoy = new Date().toISOString().split('T')[0];
+      document.getElementById('m-fecha').min = hoy;
+    });
+
+    // === Toggle tarjetas peluquería ===
+    function toggleGrm(card) {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.grm-card').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    }
+
+    // === Modal ===
+    let servicioSeleccionado = '';
+
+    function abrirModal(servicio, e) {
+      e.stopPropagation(); // no disparar el toggle de la tarjeta
+      servicioSeleccionado = servicio;
+      document.getElementById('modal-titulo').textContent = `Agendar: ${servicio}`;
+      document.getElementById('modal-subtitulo').textContent = 'Completa los datos y te contactaremos para confirmar.';
+      document.getElementById('modal-form').style.display = 'block';
+      document.getElementById('modal-success').style.display = 'none';
+      document.getElementById('modal-error').style.display = 'none';
+      document.getElementById('modal-overlay').classList.add('open');
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal-overlay').classList.remove('open');
+    }
+
+    function cerrarModalFondo(e) {
+      if (e.target === document.getElementById('modal-overlay')) cerrarModal();
+    }
+
+    function confirmarCita() {
+      const pet    = document.getElementById('m-pet').value.trim();
+      const dueno  = document.getElementById('m-dueno').value.trim();
+      const tel    = document.getElementById('m-tel').value.trim();
+      const fecha  = document.getElementById('m-fecha').value;
+      const hora   = document.getElementById('m-hora').value;
+      const err    = document.getElementById('modal-error');
+
+      if (!pet || !dueno || !tel || !fecha || !hora) {
+        err.textContent = '⚠️ Por favor completa todos los campos obligatorios.';
+        err.style.display = 'block';
+        return;
+      }
+
+      err.style.display = 'none';
+
+      // Formatear fecha legible
+      const [y, m, d] = fecha.split('-');
+      const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+      const fechaLegible = `${parseInt(d)} de ${meses[parseInt(m)-1]} de ${y}`;
+
+      document.getElementById('success-msg').textContent =
+        `${pet} tiene cita de "${servicioSeleccionado}" el ${fechaLegible} a las ${hora}. Te llamaremos al ${tel} para confirmar.`;
+
+      document.getElementById('modal-form').style.display = 'none';
+      document.getElementById('modal-success').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>

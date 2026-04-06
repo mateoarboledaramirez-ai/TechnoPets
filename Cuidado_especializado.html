@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Cuidado Especializado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal: #0a9396;
+      --teal-dark: #005f73;
+      --teal-light: #94d2bd;
+      --orange: #ffa805;
+      --bg: #001219;
+      --card-bg: #0d2b35;
+      --text: #e0f0f0;
+      --text-muted: #7fbfcc;
+      --border: rgba(148,210,189,0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(10,147,150,0.12) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,168,5,0.07) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* === NAVBAR === */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0,18,25,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148,210,189,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      color: var(--teal-light);
+      text-decoration: none;
+    }
+    .logo span { font-style: italic; color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal-light); }
+
+    .nav-btn {
+      background: var(--teal) !important;
+      color: white !important;
+      padding: 8px 20px;
+      border-radius: 50px;
+      transition: background 0.2s !important;
+    }
+    .nav-btn:hover { background: var(--teal-dark) !important; }
+
+    .nav-back {
+      background: rgba(148,210,189,0.08) !important;
+      color: var(--teal-light) !important;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1px solid rgba(148,210,189,0.18) !important;
+    }
+    .nav-back:hover { background: rgba(148,210,189,0.16) !important; }
+
+    /* === PAGE HEADER === */
+    .page-header {
+      text-align: center;
+      padding: 64px 24px 40px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(148,210,189,0.1);
+      border: 1px solid rgba(148,210,189,0.25);
+      color: var(--teal-light);
+      padding: 6px 18px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .page-header p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* === SECTION LABEL === */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: 960px;
+      margin: 0 auto 32px;
+      padding: 0 24px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+
+    .section-label span {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(148,210,189,0.18);
+    }
+
+    /* === GRID === */
+    .specialties-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* === SPECIALTY CARD === */
+    .spec-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1), border-color 0.3s, box-shadow 0.3s;
+      animation: fadeUp 0.6s ease both;
+      position: relative;
+    }
+
+    .spec-card:nth-child(1) { animation-delay: 0.05s; }
+    .spec-card:nth-child(2) { animation-delay: 0.10s; }
+    .spec-card:nth-child(3) { animation-delay: 0.15s; }
+    .spec-card:nth-child(4) { animation-delay: 0.20s; }
+    .spec-card:nth-child(5) { animation-delay: 0.25s; }
+    .spec-card:nth-child(6) { animation-delay: 0.30s; }
+    .spec-card:nth-child(7) { animation-delay: 0.35s; }
+
+    .spec-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,147,150,0.07), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .spec-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(10,147,150,0.5);
+      box-shadow: 0 14px 40px rgba(10,147,150,0.18);
+    }
+
+    .spec-card:hover::after { opacity: 1; }
+
+    .spec-card.open {
+      border-color: var(--teal);
+      box-shadow: 0 8px 30px rgba(10,147,150,0.22);
+    }
+
+    /* Card header */
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 22px;
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 13px;
+      background: rgba(10,147,150,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .spec-card:hover .card-icon,
+    .spec-card.open .card-icon {
+      background: rgba(10,147,150,0.28);
+      transform: scale(1.07);
+    }
+
+    .card-title { flex: 1; }
+
+    .card-title h3 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+      line-height: 1.3;
+    }
+
+    .card-title p {
+      font-size: 0.77rem;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-top: 3px;
+    }
+
+    .card-toggle {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(10,147,150,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--teal-light);
+      font-size: 0.85rem;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .spec-card.open .card-toggle {
+      background: var(--teal);
+      color: white;
+      transform: rotate(180deg);
+    }
+
+    /* Collapsible body */
+    .card-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .spec-card.open .card-body { max-height: 500px; }
+
+    .card-body-inner {
+      padding: 16px 22px 20px;
+      border-top: 1px solid rgba(148,210,189,0.1);
+    }
+
+    .card-body-inner ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-body-inner ul li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    .card-body-inner ul li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.81rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      padding: 9px 18px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 4px 14px rgba(10,147,150,0.28);
+    }
+
+    .card-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(10,147,150,0.42);
+    }
+
+    /* === FOOTER === */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      color: rgba(127,191,204,0.35);
+      font-size: 0.8rem;
+      border-top: 1px solid rgba(148,210,189,0.07);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .specialties-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="Pagina_Principal.html">🐾 TechnoPets</a>
+    <ul class="nav-links">
+      <li><a href="Pagina_Principal.html" class="nav-back">← Inicio</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <h1>Cuidado<br><em>Especializado</em></h1>
+  </header>
+
+  <div class="section-label">
+    <span>7 especialidades disponibles</span>
+  </div>
+
+  <!-- GRID -->
+  <div class="specialties-grid">
+
+    <!-- 1. Cirugía -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🔪</div>
+        <div class="card-title">
+          <h3>Cirugía Veterinaria</h3>
+          <p>Procedimientos quirúrgicos seguros</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Cirugías generales y de tejidos blandos</li>
+            <li>Esterilización y castración</li>
+            <li>Cirugías ortopédicas y traumatología</li>
+            <li>Procedimientos de emergencia</li>
+            <li>Cirugía laparoscópica mínimamente invasiva</li>
+          </ul>
+          <a href="#" class="card-cta">Solicitar cita →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Hospitalización -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🏥</div>
+        <div class="card-title">
+          <h3>Hospitalización</h3>
+          <p>Monitoreo continuo 24/7</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Monitoreo constante día y noche</li>
+            <li>Terapia intravenosa y fluidoterapia</li>
+            <li>Exámenes de laboratorio en tiempo real</li>
+            <li>Cuidados postoperatorios especializados</li>
+            <li>Nutrición parenteral y soporte vital</li>
+          </ul>
+          <a href="#" class="card-cta">Ver disponibilidad →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Diagnóstico avanzado -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🔬</div>
+        <div class="card-title">
+          <h3>Diagnóstico Avanzado</h3>
+          <p>Imágenes y laboratorio de alta precisión</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Ecografías abdominales y cardíacas</li>
+            <li>Radiografía digital de alta resolución</li>
+            <li>Exámenes de laboratorio completos</li>
+            <li>Pruebas de sangre y bioquímica</li>
+            <li>Endoscopía diagnóstica</li>
+          </ul>
+          <a href="#" class="card-cta">Ver resultados →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Dermatología -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🧴</div>
+        <div class="card-title">
+          <h3>Dermatología Veterinaria</h3>
+          <p>Piel, pelaje y alergias</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Tratamiento de alergias alimentarias y ambientales</li>
+            <li>Infecciones cutáneas bacterianas y fúngicas</li>
+            <li>Control de caída excesiva de pelo</li>
+            <li>Dermatitis atópica y seborreica</li>
+            <li>Biopsia y diagnóstico de lesiones cutáneas</li>
+          </ul>
+          <a href="#" class="card-cta">Agendar consulta →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Odontología -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🦷</div>
+        <div class="card-title">
+          <h3>Odontología Veterinaria</h3>
+          <p>Salud bucal integral</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Limpieza dental profesional con ultrasonido</li>
+            <li>Extracciones y endodoncia veterinaria</li>
+            <li>Tratamiento de enfermedades periodontales</li>
+            <li>Ortodoncia y corrección de maloclusión</li>
+            <li>Radiografía dental intraoral</li>
+          </ul>
+          <a href="#" class="card-cta">Reservar limpieza →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Oncología -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">🎗️</div>
+        <div class="card-title">
+          <h3>Oncología Veterinaria</h3>
+          <p>Detección y tratamiento del cáncer</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Diagnóstico y estadificación de tumores</li>
+            <li>Quimioterapia y protocolos oncológicos</li>
+            <li>Cirugía de resección tumoral</li>
+            <li>Seguimiento especializado y control</li>
+            <li>Cuidados paliativos y calidad de vida</li>
+          </ul>
+          <a href="#" class="card-cta">Consultar oncólogo →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Cardiología -->
+    <div class="spec-card" onclick="toggle(this)">
+      <div class="card-head">
+        <div class="card-icon">❤️</div>
+        <div class="card-title">
+          <h3>Cardiología Veterinaria</h3>
+          <p>Corazón y sistema circulatorio</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Ecocardiogramas Doppler color</li>
+            <li>Electrocardiogramas y monitoreo Holter</li>
+            <li>Diagnóstico de enfermedades cardíacas</li>
+            <li>Tratamiento de insuficiencia cardíaca</li>
+            <li>Control de presión arterial</li>
+          </ul>
+          <a href="#" class="card-cta">Evaluar corazón →</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>🐾 TechnoPets · Hecho en 2025 por: Liliana Prato, David Carvajal, Mateo Arboleda y Jesus Garcia 🐾</p>
+  </footer>
+
+  <script>
+    function toggle(card) {
+      const isOpen = card.classList.contains('open');
+      document.querySelectorAll('.spec-card').forEach(c => c.classList.remove('open'));
+      if (!isOpen) card.classList.add('open');
+    }
+  </script>
+
+</body>
+</html>
