@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Cuidado Especializado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/Cuidado_especializado.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a class="logo" href="Pagina_Principal.html">🐾 Techno<span>Pets</span></a>
+    <ul class="nav-links">
+      <li><a href="Pagina_Principal.html" class="nav-back">← Inicio</a></li>
+    </ul>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="page-badge">⭐ Servicios Premium</div>
+    <h1>Cuidado<br><em>Especializado</em></h1>
+    <p>Servicios avanzados respaldados por especialistas certificados y tecnología de punta.</p>
+  </header>
+
+  <div class="section-label">
+    <span>7 especialidades disponibles</span>
+  </div>
+
+  <!-- GRID -->
+  <div class="specialties-grid">
+
+    <!-- 1. Cirugía -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🔪</div>
+        <div class="card-title">
+          <h3>Cirugía Veterinaria</h3>
+          <p>Procedimientos quirúrgicos seguros</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Cirugías generales y de tejidos blandos</li>
+            <li>Esterilización y castración</li>
+            <li>Cirugías ortopédicas y traumatología</li>
+            <li>Procedimientos de emergencia</li>
+            <li>Cirugía laparoscópica mínimamente invasiva</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Cirugía Veterinaria', event)">📅 Solicitar cita</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Hospitalización -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🏥</div>
+        <div class="card-title">
+          <h3>Hospitalización</h3>
+          <p>Monitoreo continuo 24/7</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Monitoreo constante día y noche</li>
+            <li>Terapia intravenosa y fluidoterapia</li>
+            <li>Exámenes de laboratorio en tiempo real</li>
+            <li>Cuidados postoperatorios especializados</li>
+            <li>Nutrición parenteral y soporte vital</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Hospitalización', event)">📅 Ver disponibilidad</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Diagnóstico avanzado -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🔬</div>
+        <div class="card-title">
+          <h3>Diagnóstico Avanzado</h3>
+          <p>Imágenes y laboratorio de alta precisión</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Ecografías abdominales y cardíacas</li>
+            <li>Radiografía digital de alta resolución</li>
+            <li>Exámenes de laboratorio completos</li>
+            <li>Pruebas de sangre y bioquímica</li>
+            <li>Endoscopía diagnóstica</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Diagnóstico Avanzado', event)">📅 Solicitar exámenes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Dermatología -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🧴</div>
+        <div class="card-title">
+          <h3>Dermatología Veterinaria</h3>
+          <p>Piel, pelaje y alergias</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Tratamiento de alergias alimentarias y ambientales</li>
+            <li>Infecciones cutáneas bacterianas y fúngicas</li>
+            <li>Control de caída excesiva de pelo</li>
+            <li>Dermatitis atópica y seborreica</li>
+            <li>Biopsia y diagnóstico de lesiones cutáneas</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Dermatología Veterinaria', event)">📅 Agendar consulta</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Odontología -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🦷</div>
+        <div class="card-title">
+          <h3>Odontología Veterinaria</h3>
+          <p>Salud bucal integral</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Limpieza dental profesional con ultrasonido</li>
+            <li>Extracciones y endodoncia veterinaria</li>
+            <li>Tratamiento de enfermedades periodontales</li>
+            <li>Ortodoncia y corrección de maloclusión</li>
+            <li>Radiografía dental intraoral</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Odontología Veterinaria', event)">📅 Reservar limpieza</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Oncología -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">🎗️</div>
+        <div class="card-title">
+          <h3>Oncología Veterinaria</h3>
+          <p>Detección y tratamiento del cáncer</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Diagnóstico y estadificación de tumores</li>
+            <li>Quimioterapia y protocolos oncológicos</li>
+            <li>Cirugía de resección tumoral</li>
+            <li>Seguimiento especializado y control</li>
+            <li>Cuidados paliativos y calidad de vida</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Oncología Veterinaria', event)">📅 Consultar oncólogo</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Cardiología -->
+    <div class="spec-card" onclick="toggleCard(this)">
+      <div class="card-head">
+        <div class="card-icon">❤️</div>
+        <div class="card-title">
+          <h3>Cardiología Veterinaria</h3>
+          <p>Corazón y sistema circulatorio</p>
+        </div>
+        <div class="card-toggle">▾</div>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <ul>
+            <li>Ecocardiogramas Doppler color</li>
+            <li>Electrocardiogramas y monitoreo Holter</li>
+            <li>Diagnóstico de enfermedades cardíacas</li>
+            <li>Tratamiento de insuficiencia cardíaca</li>
+            <li>Control de presión arterial</li>
+          </ul>
+          <button class="card-cta" onclick="abrirModal('Cardiología Veterinaria', event)">📅 Evaluar corazón</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== MODAL ===== -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-box" id="modal-box">
+
+      <!-- PASO 1: Formulario -->
+      <div id="modal-form">
+        <div class="modal-header">
+          <div class="modal-icon" id="modal-icon">⭐</div>
+          <div>
+            <h3 id="modal-titulo">Solicitar cita</h3>
+            <p class="modal-sub" id="modal-servicio">Servicio especializado</p>
+          </div>
+        </div>
+
+        <div class="modal-steps">
+          <div class="mstep active" id="mstep-1">
+            <span class="mstep-num">1</span><span class="mstep-label">Tu mascota</span>
+          </div>
+          <div class="mstep-line" id="mline-1"></div>
+          <div class="mstep" id="mstep-2">
+            <span class="mstep-num">2</span><span class="mstep-label">Fecha y hora</span>
+          </div>
+          <div class="mstep-line" id="mline-2"></div>
+          <div class="mstep" id="mstep-3">
+            <span class="mstep-num">3</span><span class="mstep-label">Confirmar</span>
+          </div>
+        </div>
+
+        <!-- SUB-PASO 1: Datos mascota -->
+        <div id="mpanel-1">
+          <div class="m-field">
+            <label>Nombre de tu mascota</label>
+            <div class="m-input-wrap">
+              <span class="m-icon">🐾</span>
+              <input type="text" id="m-pet" placeholder="Ej: Max">
+            </div>
+          </div>
+          <div class="m-row">
+            <div class="m-field">
+              <label>Especie</label>
+              <div class="m-input-wrap">
+                <span class="m-icon">🐶</span>
+                <select id="m-especie">
+                  <option value="">Seleccionar</option>
+                  <option>Perro</option>
+                  <option>Gato</option>
+                  <option>Ave</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+            </div>
+            <div class="m-field">
+              <label>Edad</label>
+              <div class="m-input-wrap">
+                <span class="m-icon">📅</span>
+                <input type="text" id="m-edad" placeholder="Ej: 3 años">
+              </div>
+            </div>
+          </div>
+          <div class="m-field">
+            <label>Síntomas o motivo de consulta</label>
+            <textarea id="m-motivo" placeholder="Describe brevemente el problema o lo que necesitas..." rows="3"></textarea>
+          </div>
+          <p class="m-error" id="err-1"></p>
+          <div class="modal-btns">
+            <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+            <button class="btn-next" onclick="irPaso(2)">Siguiente →</button>
+          </div>
+        </div>
+
+        <!-- SUB-PASO 2: Fecha, hora, veterinario -->
+        <div id="mpanel-2" style="display:none;">
+          <div class="m-row">
+            <div class="m-field">
+              <label>Fecha de la cita</label>
+              <div class="m-input-wrap">
+                <span class="m-icon">📆</span>
+                <input type="date" id="m-fecha">
+              </div>
+            </div>
+            <div class="m-field">
+              <label>Hora preferida</label>
+              <div class="m-input-wrap">
+                <span class="m-icon">🕐</span>
+                <select id="m-hora">
+                  <option value="">Seleccionar</option>
+                  <option>07:00 AM</option>
+                  <option>08:00 AM</option>
+                  <option>09:00 AM</option>
+                  <option>10:00 AM</option>
+                  <option>11:00 AM</option>
+                  <option>02:00 PM</option>
+                  <option>03:00 PM</option>
+                  <option>04:00 PM</option>
+                  <option>05:00 PM</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="m-field">
+            <label>Veterinario especialista</label>
+            <div class="m-input-wrap">
+              <span class="m-icon">👨‍⚕️</span>
+              <select id="m-vet">
+                <option value="">Seleccionar especialista</option>
+                <option>Dr. Juan Pérez — Cirugía</option>
+                <option>Dra. María Torres — Medicina General</option>
+                <option>Dr. Carlos Ríos — Cardiología</option>
+                <option>Dra. Laura Gómez — Dermatología</option>
+                <option>Dr. Andrés Silva — Oncología</option>
+                <option>Dra. Sara Muñoz — Odontología</option>
+              </select>
+            </div>
+          </div>
+          <div class="m-field">
+            <label>Tu nombre</label>
+            <div class="m-input-wrap">
+              <span class="m-icon">👤</span>
+              <input type="text" id="m-dueno" placeholder="Nombre del dueño">
+            </div>
+          </div>
+          <div class="m-field">
+            <label>Teléfono de contacto</label>
+            <div class="m-input-wrap">
+              <span class="m-icon">📱</span>
+              <input type="tel" id="m-tel" placeholder="+57 300...">
+            </div>
+          </div>
+          <p class="m-error" id="err-2"></p>
+          <div class="modal-btns">
+            <button class="btn-cancel" onclick="irPaso(1)">← Atrás</button>
+            <button class="btn-next" onclick="irPaso(3)">Revisar cita →</button>
+          </div>
+        </div>
+
+        <!-- SUB-PASO 3: Resumen -->
+        <div id="mpanel-3" style="display:none;">
+          <div class="resumen-box" id="resumen-content"></div>
+          <p class="m-error" id="err-3"></p>
+          <div class="modal-btns">
+            <button class="btn-cancel" onclick="irPaso(2)">← Editar</button>
+            <button class="btn-confirm" onclick="confirmarCita()">✓ Confirmar cita</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ÉXITO -->
+      <div id="modal-success" style="display:none;">
+        <div class="success-wrap">
+          <div class="success-icon">🐾</div>
+          <h3>¡Cita confirmada!</h3>
+          <p id="success-msg">Tu cita ha sido registrada con éxito.</p>
+          <button class="btn-confirm" style="margin-top:20px; width:100%;" onclick="cerrarModal()">Listo ✓</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>🐾 TechnoPets · Hecho en 2025 por: Liliana Prato, David Carvajal, Mateo Arboleda y Jesus Garcia 🐾</p>
+  </footer>
+
+  <script src="js/Cuidado_especializado.js"></script>
+</body>
+</html>

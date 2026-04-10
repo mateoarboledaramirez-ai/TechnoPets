@@ -14,20 +14,23 @@
   // Cargar mascotas del usuario desde localStorage
   let userPets = [];
   function loadUserPets() {
-    const allPets = JSON.parse(localStorage.getItem('tecnoMascotas') || '[]');
-    // Filtrar mascotas que pertenecen al usuario logueado
-    userPets = allPets.filter(pet => pet.duenio === loggedUserName || pet.correo === loggedUserEmail);
-    if (userPets.length === 0) {
-      // Si no hay mascotas del usuario, crear algunas de ejemplo
-      userPets = [
-        { tipo: 'Perro', nombre: 'Max', raza: 'Labrador', edad: '3', sexo: 'Macho', peso: '25',
-          duenio: loggedUserName, telefono: loggedUserPhone || '3001234567', correo: loggedUserEmail,
-          historial: [] },
-        { tipo: 'Gato', nombre: 'Luna', raza: 'Siamés', edad: '2', sexo: 'Hembra', peso: '4',
-          duenio: loggedUserName, telefono: loggedUserPhone || '3001234567', correo: loggedUserEmail,
-          historial: [] }
-      ];
-    }
+    // Las mascotas se guardan en 'tecnoPets' por Inicio_de_sesion.js
+    const rawPets = JSON.parse(localStorage.getItem('tecnoPets') || '[]');
+    // Normalizar campos: Inicio_de_sesion.js guarda {especie, emoji, nombre, raza, edad, sexo, peso}
+    // Consulta_y_medicina_preventiva.js espera {tipo, nombre, raza, edad, sexo, peso, duenio, telefono, correo}
+    userPets = rawPets.map(pet => ({
+      tipo:     pet.especie  || pet.tipo     || 'Otro',
+      emoji:    pet.emoji    || '🐾',
+      nombre:   pet.nombre   || '',
+      raza:     pet.raza     || '',
+      edad:     pet.edad     || '',
+      sexo:     pet.sexo     || '',
+      peso:     pet.peso     || '',
+      duenio:   pet.duenio   || loggedUserName,
+      telefono: pet.telefono || pet.tel || loggedUserPhone || '',
+      correo:   pet.correo   || loggedUserEmail,
+      historial: pet.historial || []
+    }));
   }
   
   // Actualizar mensaje de bienvenida con el nombre del usuario
@@ -134,14 +137,14 @@
         <div class="not-found">
           <div class="nf-icon">🐾</div>
           <p style="font-weight:600; color:var(--text); margin-bottom:8px">No tienes mascotas registradas</p>
-          <p>Crea tu cuenta en la clínica para registrar tus mascotas.</p>
+          <p>Regresa al inicio de sesión y crea una cuenta con tus mascotas para poder agendar una cita.</p>
         </div>
       `;
       return;
     }
     
     userPets.forEach((pet, idx) => {
-      const typeIcon = pet.tipo === 'Perro' ? '🐶' : pet.tipo === 'Gato' ? '🐱' : pet.tipo === 'Ave' ? '🐦' : '🐾';
+      const typeIcon = pet.emoji || (pet.tipo.toLowerCase() === 'perro' ? '🐶' : pet.tipo.toLowerCase() === 'gato' ? '🐱' : pet.tipo.toLowerCase() === 'ave' ? '🐦' : '🐾');
       const card = document.createElement('div');
       card.className = 'vet-card';
       card.style.cursor = 'pointer';
@@ -525,3 +528,4 @@
     document.querySelectorAll('.err-msg').forEach(e=>{e.textContent='';e.classList.remove('show');});
     document.querySelectorAll('input,select').forEach(e=>e.classList.remove('error'));
   }
+  
