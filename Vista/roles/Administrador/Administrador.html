@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Administrador</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Administrador.css">
+</head>
+<body>
+  <nav>
+    <a class="logo" href="../../Pagina_Principal.html">
+      <span class="logo-icon">🐾</span>
+      Techno<span>Pets</span>
+    </a>
+  </nav>
+
+  <main class="dashboard admin-dashboard">
+    <header class="dashboard-head">
+      <div>
+        <p class="eyebrow">Administración</p>
+        <h1>Panel administrativo</h1>
+        <p class="subhead">Monitorea indicadores, administra cuentas y controla servicios desde aquí.</p>
+      </div>
+      <button class="btn btn-primary" onclick="generateReport()">Generar reporte</button>
+    </header>
+
+    <section class="module-section">
+      <div class="section-header">
+        <h2>Módulos administrativos</h2>
+        <p>Accede a las áreas de gestión, métricas e inventario.</p>
+      </div>
+      <div class="module-grid">
+        <a class="module-card" href="#">👥<span>EMPLEADOS</span></a>
+        <a class="module-card" href="#">🩺<span>VETERINARIOS</span></a>
+        <a class="module-card" href="#">🧾<span>RECEPCIONISTAS</span></a>
+        <a class="module-card" href="#">👤<span>USUARIOS</span></a>
+        <a class="module-card" href="#">📦<span>INVENTARIO</span></a>
+        <a class="module-card" href="#">💰<span>PAGOS</span></a>
+        <a class="module-card" href="#">📈<span>REPORTES</span></a>
+        <a class="module-card" href="#">📅<span>CITAS</span></a>
+        <a class="module-card" href="#">📖<span>HISTORIA CLÍNICA</span></a>
+        <a class="module-card" href="#">🧪<span>EXÁMENES</span></a>
+        <a class="module-card" href="#">💊<span>MEDICAMENTOS</span></a>
+        <a class="module-card" href="#">🩺<span>TRATAMIENTOS</span></a>
+        <a class="module-card" href="#">🐾<span>MASCOTAS</span></a>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <p class="stat-label">Usuarios activos</p>
+        <h2 id="admin-users">0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Citas totales</p>
+        <h2 id="admin-appointments">0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Ingresos mensuales</p>
+        <h2 id="admin-revenue">$0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Servicios activos</p>
+        <h2 id="admin-services">0</h2>
+      </article>
+    </section>
+
+    <section class="tabs-panel">
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('usuarios')">Usuarios</button>
+        <button class="tab-btn" onclick="switchTab('servicios')">Servicios</button>
+        <button class="tab-btn" onclick="switchTab('reportes')">Reportes</button>
+      </div>
+
+      <div id="tab-usuarios" class="tab-content active">
+        <div class="panel-header">
+          <h2>Lista de usuarios</h2>
+          <input id="admin-search-users" type="search" placeholder="Buscar usuario" oninput="renderUsers()">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nombre</th><th>Rol</th><th>Correo</th><th>Estado</th></tr></thead>
+            <tbody id="users-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-servicios" class="tab-content">
+        <div class="panel-header">
+          <h2>Servicios y precios</h2>
+          <button class="btn btn-secondary" onclick="addService()">Agregar servicio</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Servicio</th><th>Descripción</th><th>Precio</th><th>Estado</th></tr></thead>
+            <tbody id="services-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="tab-reportes" class="tab-content">
+        <div class="panel-header">
+          <h2>Resumen de rendimiento</h2>
+          <p class="small-text">Mira la actividad por área y estado de la clínica.</p>
+        </div>
+        <div class="report-grid">
+          <div class="report-card">
+            <span>Ocupación de citas</span>
+            <div class="report-bar"><div style="width: 78%"></div></div>
+            <strong>78% en uso</strong>
+          </div>
+          <div class="report-card">
+            <span>Retención de clientes</span>
+            <div class="report-bar"><div style="width: 64%"></div></div>
+            <strong>64% fidelizados</strong>
+          </div>
+          <div class="report-card">
+            <span>Servicios más solicitados</span>
+            <ol>
+              <li>Consulta médica</li>
+              <li>Vacunación</li>
+              <li>Baño y peluquería</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="Administrador.js"></script>
+</body>
+</html>

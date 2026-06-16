@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Veterinario</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Veterinario.css">
+</head>
+<body>
+  <nav>
+    <a class="logo" href="../../Pagina_Principal.html">
+      <span class="logo-icon">🐾</span>
+      Techno<span>Pets</span>
+    </a>
+  </nav>
+
+  <main class="dashboard chef-vet">
+    <header class="dashboard-head">
+      <div>
+        <p class="eyebrow">Panel de médico</p>
+        <h1>Agenda veterinaria</h1>
+        <p class="subhead">Revisa tu lista de pacientes, agrega notas y finaliza consultas.</p>
+      </div>
+      <button class="btn btn-primary" onclick="loadNextAppointment()">Siguiente cita</button>
+    </header>
+
+    <section class="module-section">
+      <div class="section-header">
+        <h2>Módulos del veterinario</h2>
+        <p>Accede a las herramientas clínicas que usas en cada consulta.</p>
+      </div>
+      <div class="module-grid">
+        <a class="module-card" href="#">📅<span>CITAS</span></a>
+        <a class="module-card" href="#">📖<span>HISTORIA CLÍNICA</span></a>
+        <a class="module-card" href="#">🩹<span>HISTORIA CIRUGÍA</span></a>
+        <a class="module-card" href="#">🧠<span>DIAGNÓSTICO</span></a>
+        <a class="module-card" href="#">🧪<span>EXÁMENES</span></a>
+        <a class="module-card" href="#">💊<span>MEDICAMENTOS</span></a>
+        <a class="module-card" href="#">🩺<span>TRATAMIENTOS</span></a>
+        <a class="module-card" href="#">🐾<span>MASCOTAS</span></a>
+      </div>
+    </section>
+
+    <section class="vet-grid">
+      <div class="appointments-panel panel">
+        <div class="panel-header">
+          <h2>Citas asignadas</h2>
+          <input id="vet-search" type="search" placeholder="Buscar por mascota o dueño" oninput="renderAppointments()">
+        </div>
+        <div class="table-wrap small">
+          <table>
+            <thead>
+              <tr><th>Hora</th><th>Paciente</th><th>Servicio</th><th>Estado</th></tr>
+            </thead>
+            <tbody id="vet-appointments"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="details-panel panel">
+        <div class="panel-header">
+          <h2>Detalle de la consulta</h2>
+          <span id="detail-status" class="badge">Selecciona una cita</span>
+        </div>
+
+        <div class="detail-card">
+          <div class="detail-row"><span>Paciente</span><strong id="detail-pet">-</strong></div>
+          <div class="detail-row"><span>Dueño</span><strong id="detail-owner">-</strong></div>
+          <div class="detail-row"><span>Servicio</span><strong id="detail-service">-</strong></div>
+          <div class="detail-row"><span>Motivo</span><strong id="detail-reason">-</strong></div>
+          <div class="detail-row"><span>Hora</span><strong id="detail-time">-</strong></div>
+          <div class="detail-row"><span>Estado</span><strong id="detail-state">-</strong></div>
+        </div>
+
+        <div class="panel-section">
+          <label for="vet-notes">Notas y diagnóstico</label>
+          <textarea id="vet-notes" rows="6" placeholder="Describe hallazgos, recomendaciones y tratamiento"></textarea>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn btn-secondary" onclick="changeStatus('En espera')">Marcar en espera</button>
+          <button class="btn btn-primary" onclick="changeStatus('Finalizada')">Finalizar consulta</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="Veterinario.js"></script>
+</body>
+</html>

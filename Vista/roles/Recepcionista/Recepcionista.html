@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechnoPets · Recepción</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;900&family=Fraunces:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Recepcionista.css">
+</head>
+<body>
+  <nav>
+    <a class="logo" href="../../Pagina_Principal.html">
+      <span class="logo-icon">🐾</span>
+      Techno<span>Pets</span>
+    </a>
+  </nav>
+
+  <main class="dashboard">
+    <header class="dashboard-head">
+      <div>
+        <p class="eyebrow">Panel de control</p>
+        <h1>Recepción</h1>
+        <p class="subhead">Gestiona citas, pacientes y el flujo del día desde un solo tablero.</p>
+      </div>
+      <button class="btn btn-primary" onclick="goToNewAppointment()">Nueva cita</button>
+    </header>
+
+    <section class="module-section">
+      <div class="section-header">
+        <h2>Módulos de recepción</h2>
+        <p>Accede rápidamente a las funciones que necesitas cada día.</p>
+      </div>
+      <div class="module-grid">
+        <a class="module-card" href="#">📅<span>CITAS</span></a>
+        <a class="module-card" href="#">🗓️<span>AGENDA</span></a>
+        <a class="module-card" href="#">👥<span>CLIENTES</span></a>
+        <a class="module-card" href="#">🐶<span>MASCOTAS</span></a>
+        <a class="module-card" href="#">🛎️<span>SERVICIOS</span></a>
+        <a class="module-card" href="#">💳<span>PAGOS</span></a>
+        <a class="module-card" href="#">💳<span>MÉTODOS DE PAGO</span></a>
+      </div>
+    </section>
+
+    <section class="stats-grid">
+      <article class="stat-card">
+        <p class="stat-label">Citas programadas</p>
+        <h2 id="stat-appointments">0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Mascotas registradas</p>
+        <h2 id="stat-pets">0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Atenciones en espera</p>
+        <h2 id="stat-pending">0</h2>
+      </article>
+      <article class="stat-card">
+        <p class="stat-label">Citas completadas</p>
+        <h2 id="stat-completed">0</h2>
+      </article>
+    </section>
+
+    <section class="panel">
+      <div class="panel-header">
+        <div>
+          <h2>Agenda de hoy</h2>
+          <p>Revisa las citas activas y los datos de cada paciente.</p>
+        </div>
+        <input id="search-input" type="search" placeholder="Buscar por mascota, dueño o servicio" oninput="renderAppointments()">
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Mascota</th>
+              <th>Dueño</th>
+              <th>Servicio</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-table"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="Recepcionista.js"></script>
+</body>
+</html>
