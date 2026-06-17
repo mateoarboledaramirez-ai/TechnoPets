@@ -189,6 +189,33 @@
         const telefono = document.getElementById('reg-telefono').value.trim();
         const pass   = document.getElementById('reg-password').value;
 
+        fetch("http://127.0.0.1:5000/registro", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        nombre: nombre,
+        telefono: telefono,
+        correo: correo,
+        direccion: "Sin dirección",
+        mascotas: pets
+    })
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data);
+
+    if(data.success){
+        console.log("Registro exitoso");
+    }else{
+        console.log(data.mensaje);
+    }
+})
+.catch(error=>{
+    console.error(error);
+});
+
         localStorage.setItem('tecnoUserFullName', nombre);
         localStorage.setItem('tecnoUserName', nombre);
         localStorage.setItem('tecnoUserEmail', correo);
